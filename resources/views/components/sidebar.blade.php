@@ -23,28 +23,21 @@
                 </div>
                 <i class="icon-menu" title="Berita"></i>
             </li> --}}
-            <li class="nav-item has-treeview {{ in_array("master", explode("/", Request::path())) ? "menu-open" : "" }}">
-                <a href="#" class="nav-link {{ in_array("master", explode("/", Request::path())) ? "active" : "" }}">
-                    <i class="bi bi-folder2 ml-1"></i>
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ in_array("konten", explode("/", Request::path())) ? "active" : "" }}">
+                    <i class="bi bi-folder2 ms-1"></i>
                     <p class="ml-2">
-                        Master
-                        <i class="right fas fa-angle-left"></i>
+                        Konten
                     </p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                    <a href="#" class="nav-link {{ in_array("konten", explode("/", Request::path())) ? "active" : "" }}">
-                        <i class="bi bi-x-diamond-fill ml-1"></i>
-                        <p class="ml-2">Konten</p>
-                    </a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="#" class="nav-link {{ in_array("tag", explode("/", Request::path())) ? "active" : "" }}">
-                        <i class="bi bi-x-diamond-fill ml-1"></i>
-                        <p class="ml-2">Tag</p>
-                    </a>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ in_array("tag", explode("/", Request::path())) ? "active" : "" }}">
+                    <i class="bi bi-bookmark-plus ms-1"></i>
+                    <p class="ml-2">
+                        Tag
+                    </p>
+                </a>
             </li>
         </ul>
         </nav>

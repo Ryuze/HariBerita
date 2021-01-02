@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function() {
     Route::prefix('/dashboard')->group(function(){
-        Route::resource('/master/konten', 'KontenController');
+        Route::resource('/konten', 'KontenController');
         Route::resource('/', 'DashboardController');
     });
 });
