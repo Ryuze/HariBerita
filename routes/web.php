@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function() {
     Route::prefix('/dashboard')->group(function(){
-        Route::resource('/konten', 'KontenController');
-        Route::resource('/', 'DashboardController');
+        Route::resource('/konten', 'KontenController')->except([
+            'show'
+        ]);
+        Route::resource('/', 'DashboardController')->only([
+            'index'
+        ]);
     });
 });
 require __DIR__.'/auth.php';

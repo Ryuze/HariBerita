@@ -14,9 +14,14 @@ class CreateContentTagsTable extends Migration
     public function up()
     {
         Schema::create('content_tags', function (Blueprint $table) {
-            $table->foreignId('content_id')->constrained();
+            $table->foreignId('content_id')->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('tag_name', 50);
-            $table->foreign('tag_name')->references('name')->on('tags');
+            $table->foreign('tag_name')->references('name')
+                ->on('tags')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
