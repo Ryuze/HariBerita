@@ -25,5 +25,7 @@ Route::middleware('auth')->group(function() {
         Route::resource('/', 'DashboardController')->only([
             'index'
         ]);
+    });
+});
 
 require __DIR__.'/auth.php';
