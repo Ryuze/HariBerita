@@ -6,5 +6,6 @@ Project ini ada untuk memenuhi tugas kuliah web framework.
 2. buat database dengan nama "harian"
 3. buka folder project dengan terminal kemudian ketik "composer install"
 4. ketik kembali "npm install" dan "npm run dev"
-5. ketik "php artisan migrate"
-6. selesai
+5. ketik "php artisan migrate:fresh --seed"
+6. ketik php artisan storage:link
+7. selesai

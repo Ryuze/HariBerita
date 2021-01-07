@@ -15,9 +15,12 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('title', 255)->nullable();
-            $table->text('content')->nullable();
+            $table->foreignId('user_id')->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('title', 255);
+            $table->text('content');
+            $table->string('image', 100);
             $table->timestamp('post_time')->nullable();
             $table->string('editor', 100)->nullable();
             $table->timestamp('edited_time')->nullable();
