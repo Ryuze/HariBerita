@@ -20,6 +20,12 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/dashboard')->group(function () {
+        Route::resource('/tag', 'TagController');
+        Route::post('/tag/store', 'TagController@store');
+        Route::get('/tag/show/{name}', 'TagController@show');
+        Route::post('/tag/update/{name}', 'TagController@update');
+        Route::get('/tag/destroy/{name}', 'TagController@destroy');
+        Route::delete('/tag/destroyAll', 'TagController@destroyAll');
         Route::resource('/konten', 'KontenController');
         Route::resource('/', 'DashboardController');
     });
