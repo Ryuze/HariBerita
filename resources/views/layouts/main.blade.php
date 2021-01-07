@@ -53,7 +53,7 @@
 
             <div>
                 <ul class="navbar-nav mr-auto" style="padding-right: 2em;">
-                    <li class="nav-item"><a href="" class="nav-link" style="padding-right:2em;">Masuk</a></li>
+                    <li class="nav-item"><a href="{{ Route('login') }}" class="nav-link" style="padding-right:2em;">Masuk</a></li>
                 </ul>
             </div>
         </div>
