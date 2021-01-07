@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::middleware('auth')->group(function() {
@@ -25,6 +25,5 @@ Route::middleware('auth')->group(function() {
         Route::resource('/', 'DashboardController')->only([
             'index'
         ]);
-    });
-});
+
 require __DIR__.'/auth.php';
