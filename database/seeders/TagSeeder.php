@@ -14,7 +14,7 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tags')->insert(
+        DB::table('tags')->insert([
           [
             'name' => 'Absurd'
           ],
@@ -47,7 +47,7 @@ class TagSeeder extends Seeder
           ],
           [
             'name' => 'Teknologi'
-          ],
-        );
+          ]
+        ]);
     }
 }
