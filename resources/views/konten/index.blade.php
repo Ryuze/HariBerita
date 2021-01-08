@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot name="title">
         Konten
-    </x-slot>
+	</x-slot>
 
     <x-slot name="contentHeader">
 		<div class="row mb-2">

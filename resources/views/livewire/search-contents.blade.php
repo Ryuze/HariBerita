@@ -22,8 +22,11 @@
             <tr>
                 <th>No</th>
                 <th>Judul</th>
-                <th>Dibuat oleh</th>
-                <th>Diedit oleh</th>
+                <th style="cursor: pointer;" wire:click="sortBy('creator')">Dibuat oleh</th>
+                <th style="cursor: pointer;" wire:click="sortBy('editor')">Diedit oleh</th>
+                <th style="cursor: pointer;" wire:click="sortBy('post_time')">
+                    Tanggal dibuat
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -41,6 +44,7 @@
                         -
                     @endif
                 </td>
+                <td>{{ $item->post_time }}</td>
                 <td>
                     <a href="#" class="btn btn-primary">
                         Lihat konten
