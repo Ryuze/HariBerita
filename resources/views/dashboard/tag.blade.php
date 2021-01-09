@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="/vendor/almasaeed2010/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- icheck bootstrap -->
 <link rel="stylesheet" href="/vendor/almasaeed2010/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="/vendor/almasaeed2010/adminlte/plugins/toastr/toastr.min.css">
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <x-admin-layout>
   <x-slot name="title">
@@ -17,7 +21,7 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="{{ URL::to('dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{ Route('index') }}">Home</a></li>
           <li class="breadcrumb-item active">Tag</li>
         </ol>
       </div>
@@ -31,55 +35,54 @@
           <div class="col-md-8">
             <div class="card card-outline card-primary">
               <div class="card-header">
-                <h3 class="card-title">Tag List</h3>
+                <h3 class="card-title">Daftar Tag</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-striped table-hover">
+                <table id="example" class="table table-striped table-hover">
                   <thead>
                     <tr>
-                      <th>Options</th>
+                      <th></th>
+                      <th>No</th>
                       <th>Nama Tag</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($tags as $t)
                     <tr>
                       <td>
-                        <div class="">
-                          <div class="icheck-primary d-inline mr-3">
-                            <input type="checkbox" value="" id="check{{ $loop->iteration }}">
-                            <label for="check{{ $loop->iteration }}"></label>
-                          </div>
-                          <div class="icheck-primary d-inline mr-1">
-                            <i class="far fa-edit"></i>
-                            <a href="" id="editTag" data-toggle="modal" data-target="#modal-default" data-name="{{ $t->name }}">
-                              Edit
-                            </a>
-                          </div>
-                          <div class="icheck-primary d-inline">
-                            <i class="far fa-trash-alt"></i>
-                            <a href="tag/destroy/{{ $t->name }}">
-                              Delete
-                            </a>
-                          </div>
+                        <div class="icheck-primary d-inline">
+                          <input type="checkbox" class="checkbox-tag" id="check{{ $loop->iteration }}">
+                          <label for="check{{ $loop->iteration }}"></label>
                         </div>
                       </td>
+                      <td>{{ $loop->iteration }}</td>
                       <td>{{ $t->name }}</td>
+                      <td>
+                        <a href="" class="btn btn-sm btn-warning edit-tag" data-toggle="modal" data-target="#modal-default" data-name="{{ $t->name }}">
+                          <i class="far fa-edit"></i>
+                          Edit
+                        </a>
+                        <a href="" class="btn btn-sm btn-danger delete-tag" data-name="{{ $t->name }}">
+                          <i class="far fa-trash-alt"></i>
+                          Hapus
+                        </a>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
                   <tfoot>
-                    <th colspan="2">
+                    <th colspan="4">
                       <div class="form-group">
                         <div class="icheck-primary d-inline mr-3">
                           <input type="checkbox" value="" id="checkAll" class="checkbox-toggle">
                           <label for="checkAll">Check All</label>
                         </div>
                         <div class="icheck-primary d-inline">
-                          <i class="far fa-trash-alt"></i>
-                          <a href="#" class="delete-all">
-                            Delete All Selected
+                          <a href="#" class="btn btn-sm btn-danger delete-all">
+                            <i class="far fa-trash-alt"></i>
+                            Hapus yang ditandai
                           </a>
                         </div>
                       </div>
@@ -95,76 +98,77 @@
           <div class="col-md-4">
             <div class="card card-outline card-success">
               <div class="card-header">
-                <h3 class="card-title">New Tag</h3>
+                <h3 class="card-title">Tambah Tag</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="tag/store" method="post">
+              <form action="{{ Route('tag.store') }}" method="post">
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputTag1">Nama Tag</label>
-                    <input type="text" name="name" class="form-control" id="exampleInputTag1" placeholder="Masukkan nama tag">
+                    <input type="text" name="tag" class="form-control" id="exampleInputTag1" placeholder="Masukkan nama tag" required>
 
-                    @if($errors->has('name'))
+                    @if($errors->has('tag'))
                     <div class="text-danger">
-                      {{ $errors->first('name') }}
+                      {{ $errors->first('tag') }}
                     </div>
                     @endif
                   </div>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
                 <!-- /.card-body -->
 
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-
-      <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Edit Tag "<span id="nameTag"></span>"</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form action="" method="post" id="editForm">
-              {{ csrf_field() }}
-              <div class="modal-body">
-                <input type="hidden" name="oldName" id="oldTag">
-                <div class="form-group">
-                  <label for="updateTag">Nama Tag</label>
-                  <input type="text" name="name" class="form-control" id="updateTag" placeholder="Masukkan nama tag">
-
-                  @if($errors->has('name'))
-                  <div class="text-danger">
-                    {{ $errors->first('name') }}
-                  </div>
-                  @endif
-                </div>
-              </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
+                <!-- <div class="card-footer">
+              </div> -->
             </form>
           </div>
-          <!-- /.modal-content -->
+          <!-- /.card -->
         </div>
-        <!-- /.modal-dialog -->
+        <!-- /.col -->
       </div>
-      <!-- /.modal -->
+      <!-- /.row -->
     </div>
-  </x-slot>
+    <!-- /.container-fluid -->
+
+    <div class="modal fade" id="modal-default">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit Tag "<span id="nameTag"></span>"</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="" method="post" id="editForm">
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+            <div class="modal-body">
+              <input type="hidden" name="oldName" id="oldTag">
+              <div class="form-group">
+                <label for="updateTag">Nama Tag</label>
+                <input type="text" name="editTag" class="form-control" id="updateTag" placeholder="Masukkan nama tag">
+
+                @if($errors->has('editTag'))
+                <div class="text-danger">
+                  {{ $errors->first('editTag') }}
+                </div>
+                @endif
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+  </div>
+</x-slot>
 </x-admin-layout>
 
 <!-- DataTables  & Plugins -->
@@ -172,51 +176,98 @@
 <script src="/vendor/almasaeed2010/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="/vendor/almasaeed2010/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="/vendor/almasaeed2010/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/vendor/almasaeed2010/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/vendor/almasaeed2010/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/vendor/almasaeed2010/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<!-- Toastr -->
+<script src="/vendor/almasaeed2010/adminlte/plugins/toastr/toastr.min.js"></script>
 
+{{ "aa" }}
+<!-- {{ Session::get('status') }} -->
+{!! session('status') !!}
+{{ "aa" }}
 <script>
+{!! session('status') !!}
 $(function () {
-  $("#example1").DataTable({
-    "responsive": true, "lengthChange": false, "autoWidth": false,
-    "buttons": ["copy"],
-    "order": [[1, 'asc']],
+  var oTable = $("#example").DataTable({
+    "responsive": true, "autoWidth": false,
+    "order": [[2, 'asc']],
     "columns": [
-      { "orderable": false, "width": "30%" }, null
-    ]
-  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      { "width": '10%', "orderable": false }, { "width": '10%' }, { "width": '55%' }, { "width": '25%', "orderable": false }
+    ],
+    "language": {
+      "oPaginate": {
+        "sPrevious": "‹",
+        "sNext":     "›",
+      }
+    },
+    "dom":'<"float-left"l><"search-tag">t<"float-left"i><"float-right"p>'
+  });
+  $("div.search-tag").html(
+    '<div class="card-tools ml-auto bd-highlight float-right">'+
+    '<div class="input-group input-group-sm" style="width: 150px;">'+
+    '<input id="searchTag" type="text" class="form-control float-right" placeholder="Cari tag" />'+
+    '<div class="input-group-append">'+
+    '<button class="btn btn-default">'+
+    '<i class="fas fa-search"></i>'+
+    '</button>'+
+    '</div>'+
+    '</div>'+
+    '</div>'
+  );
+  $('#searchTag').on('keyup change', function () {
+    oTable.column(1).search($(this).val()).draw();
+  });
 
-  $('.checkbox-toggle').click(function () {
-    var clicks = $(this).data('clicks')
-    if (clicks) {
-      //Uncheck all checkboxes
-      $('tbody input[type=\'checkbox\']').prop('checked', false)
+  $('.checkbox-toggle').click(function (e) {
+    if ($(this).is(':checked',true)) {
+      $('.checkbox-tag').prop('checked', true)
+      $('.checkbox-toggle').prop('checked', true)
     } else {
-      //Check all checkboxes
-      $('tbody input[type=\'checkbox\']').prop('checked', true)
+      $('.checkbox-tag').prop('checked', false)
+      $('.checkbox-toggle').prop('checked', false)
     }
     $(this).data('clicks', !clicks)
   });
 
-  // $.ajaxSetup({
-  //   headers: {
-  //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //   }
-  // });
-  $('body').on('click', '#editTag', function (event) {
+  $('.checkbox-tag').on('click',function(){
+    if($('.checkbox-tag:checked').length == $('.checkbox-tag').length){
+      $('.checkbox-toggle').prop('checked',true);
+    }else{
+      $('.checkbox-toggle').prop('checked',false);
+    }
+  });
+
+  $('.edit-tag').click(function (event) {
 
     event.preventDefault();
     var name = $(this).data('name');
     // console.log(name);
-    $.get('tag/show/' + name, function (data) {
+    $.get('tag/' + name, function (data) {
       // $('#submit').val("Edit Tag");
       $('#modal-default').modal('show');
       $('#nameTag').html(data.data.name);
-      $('#editForm').attr('action', 'tag/update/'+data.data.name);
+      $('#editForm').attr('action', 'tag/'+data.data.name);
       $('#oldTag').val(data.data.name);
       $('#updateTag').val(data.data.name);
     })
+  });
+  $('.delete-tag').click(function (e) {
+    var check = confirm("Yakin untuk menghapus data?");
+    var name = $(this).data('name');
+
+    if (check) {
+      $.ajax({
+        url: 'tag/'+name,
+        type: 'DELETE',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        success: function() {
+          location.reload();
+        },
+        error: function () {
+          alert("gagal");
+        }
+      });
+    } else {
+      return false;
+    }
   });
 
   $('.delete-all').on('click', function(e) {
@@ -263,4 +314,6 @@ $(function () {
   // });
 });
 </script>
-<!-- https://www.codecheef.org/article/edit-data-with-bootstrap-modal-window-in-laravel -->
+<!-- https://daengweb.id/membuat-crud-laravel-8-jetstream-livewire -->
+<!-- https://www.itsolutionstuff.com/post/how-to-delete-multiple-records-using-checkbox-in-laravel-5-example.html -->
+<!-- https://hdtuto.com/article/php-laravel-56-how-to-delete-multiple-row-with-checkbox-using-ajax -->

@@ -38,11 +38,11 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-          'name' => 'required'
+          'tag' => 'required'
         ]);
 
         Tag::create([
-          'name' => $request->name
+          'name' => $request->tag
         ]);
 
         return redirect()->back();
@@ -83,11 +83,11 @@ class TagController extends Controller
     public function update(Request $request, $oldName)
     {
       $this->validate($request,[
-        'name' => 'required'
+        'editTag' => 'required'
       ]);
 
       $tag = Tag::find($oldName);
-      $tag->name = $request->name;
+      $tag->name = $request->editTag;
       $tag->save();
 
       return redirect()->back();
@@ -101,8 +101,10 @@ class TagController extends Controller
      */
     public function destroy($name)
     {
-        Tag::find($name)->delete();
-        return redirect()->back();
+        Tag::findOrFail($name)->delete();
+        $request->session()->flash('status', "toastr.success('Data berhasil dihapus.')");
+        // return $toast;
+        // return redirect()->back();
     }
 
     public function destroyAll(Request $request)
