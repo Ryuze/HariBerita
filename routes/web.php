@@ -14,22 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-  return view('index');
+    return view('index');
 });
-
-Route::middleware('auth')->group(function() {
-  Route::prefix('/dashboard')->group(function(){
-    Route::delete('/tag/destroyAll', 'TagController@destroyAll');
-    Route::resource('/tag', 'TagController')->except([
+route::get('/tentang', function () {
+    return view('/about/tentang');
+});
+route::get('/article', function () {
+  return view('/konten/article');
+});
+Route::middleware('auth')->group(function () {
+    Route::prefix('/dashboard')->group(function () {
+        Route::delete('/tag/destroyAll', 'TagController@destroyAll');
+        Route::resource('/tag', 'TagController')->except([
       'create', 'edit'
     ]);
-    Route::resource('/konten', 'KontenController')->except([
+        Route::resource('/konten', 'KontenController')->except([
       'show'
     ]);
-    Route::resource('/', 'DashboardController')->only([
+        Route::resource('/', 'DashboardController')->only([
       'index'
     ]);
-  });
+    });
 });
 
 require __DIR__.'/auth.php';

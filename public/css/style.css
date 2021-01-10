@@ -8,7 +8,7 @@
 }
 li:hover{
     background-color: #f7f7f7;
-    font-weight: bold;
+
 }
 .bg-grey:hover {
     background-color: #e7e7e7;
@@ -157,11 +157,16 @@ i.fa-grip-lines-vertical{
     max-height: 243px;
 }
 
+
+
+
+img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
 .article-img{
     position: sticky;
-object-fit: cover;
-object-position: center;
-width: 100%;
 height: 40%;
 }
 .content-img{
@@ -224,6 +229,12 @@ height: 40%;
        background-color: #646262;
 
 }
+
+
+
+.jumbotron{
+    display: none;
+}
 .garis{
 	background-color: #f7f7f7;
     width: 100%;
@@ -271,4 +282,45 @@ height: 40%;
     .garis{
         margin-left: -1.5em;
     }
+
+
+    .sticky {
+        z-index: 3;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        overflow: visible;
+      }
+    .jumbotron{
+        background-color: white;
+        color: #ff9343;
+        border-radius: 10px;
+        box-shadow: 0 8px 12px -6px #646262;
+        padding: -2em;
+        position: relative;
+        display: inline-block;
+    }
+    .jumbotron img{
+    max-height: 243px;
+    object-fit: scale-down;
+    object-position: center;
+    }
+    .text-banner{
+        position: sticky;
+        margin-top: -243px;
+        padding:100px 1.5em;
+        width: 100%;
+        text-align: center;
+        
+    }
+    .text-banner>h2{
+        width: 27%;
+    }
+    .text-banner>p{
+        margin-top: -40px;
+        position: absolute;
+        right: 1.5em;
+        width: 27%;
+        font-size: 18px;
+    }    
 }

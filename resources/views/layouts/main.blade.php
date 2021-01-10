@@ -13,9 +13,9 @@
 
 <body>
     <!-- navigation -->
-    <div class="navbar navbar-expand-lg navbar-light box">
+    <div class="navbar navbar-expand-lg navbar-light box" id="navbar">
 
-        <a href="/" class="navbar-brand" style="color: #ff9343;">CIGNews</a>
+        <a href="{{ url('/')}}" class="navbar-brand" style="color: #ff9343;">CIGNews</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                         <a href="" class="dropdown-item bg-grey text-color box">Politik</a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="" class="nav-link">Tentang</a></li>
+                <li class="nav-item"><a href="{{ url('/tentang')}}" class="nav-link">Tentang</a></li>
                 <li class="nav-item"><a href="" class="nav-link">Kontak</a></li>
             </ul>
 
@@ -53,7 +53,8 @@
 
             <div>
                 <ul class="navbar-nav mr-auto" style="padding-right: 2em;">
-                    <li class="nav-item"><a href="{{ Route('login') }}" class="nav-link" style="padding-right:2em;">Masuk</a></li>
+                    <li class="nav-item"><a href="{{ Route('login') }}" class="nav-link"
+                            style="padding-right:2em;">Masuk</a></li>
                 </ul>
             </div>
         </div>
@@ -106,8 +107,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
 </script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="{{asset('js/javascript.js')}}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/javascript.js') }}"></script>
 
 </html>
