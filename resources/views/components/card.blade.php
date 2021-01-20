@@ -1,6 +1,8 @@
-<div class="card card-outline card-primary">
+<div class="card card-outline card-{{ $outline }}">
     <div class="card-body">
-        <h3 class="card-title">{{ $title }}</h3>
+        <div class="card-title">
+            <h4>{{ $title }}</h4>
+        </div>
 
         @if (isset($slot) && $slot != "")
             <p class="card-text">

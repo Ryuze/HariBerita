@@ -7,7 +7,6 @@
 
 		<title>Berita Harian | {{ $title }}</title>
 
-		@livewireStyles
 		{{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
 		<link rel="stylesheet" href="/vendor/bootstrap-5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/vendor/almasaeed2010/adminlte/plugins/fontawesome-free/css/all.min.css">
@@ -74,11 +73,9 @@
 		<script src="/vendor/almasaeed2010/adminlte/plugins/jquery/jquery.min.js"></script>
 		<script src="/vendor/almasaeed2010/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="/vendor/almasaeed2010/adminlte/dist/js/adminlte.min.js"></script>
-		@livewireScripts
-		{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
-
 		@isset($botScripts)
-        	{{ $botScripts }}
+			{{ $botScripts }}
 		@endisset
+		{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 	</body>
 </html>

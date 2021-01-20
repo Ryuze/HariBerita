@@ -25,7 +25,11 @@
     <x-slot name="body">
 		<div class="content">
 			<div class="container-fluid">
-				<x-card title="Tambah">
+				<x-card outline="primary">
+                    <x-slot name="title">
+                        Tambah
+                    </x-slot>
+
                     <form action="{{ Route('konten.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">

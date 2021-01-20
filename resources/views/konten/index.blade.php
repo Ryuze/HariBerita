@@ -3,6 +3,10 @@
         Konten
 	</x-slot>
 
+	<x-slot name="botStyle">
+		@livewireStyles
+	</x-slot>
+
     <x-slot name="contentHeader">
 		<div class="row mb-2">
 			<div class="col-sm-6">
@@ -20,8 +24,11 @@
     <x-slot name="body">
 		<div class="content">
 			<div class="container-fluid">
-				<x-card title="Konten">
-                    @livewire('search-contents')                    
+				<x-card outline="primary">
+					<x-slot name="title">
+						Konten
+					</x-slot>
+                    @livewire('search-contents')
 				</x-card>
 			</div>
 		</div>
@@ -40,5 +47,6 @@
 				}
 			})
 		</script>
+		@livewireScripts
     </x-slot>
 </x-admin-layout>

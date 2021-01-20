@@ -25,7 +25,11 @@
     <x-slot name="body">
 		<div class="content">
 			<div class="container-fluid">
-				<x-card title="Tambah">
+				<x-card outline="primary">
+                    <x-slot name="title">
+                        Ubah
+                    </x-slot>
+
                     <form action="{{ Route('konten.update', $contents->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

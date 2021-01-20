@@ -18,12 +18,25 @@ class ContentSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        for ($x = 0; $x <=10; $x++){
+        for ($x = 0; $x <=5; $x++){
             DB::table('contents')->insert([
                 'user_id' => 1,
                 'title' => $faker->name,
                 'content' => Str::random(100),
-                'image' => Str::random(5) . '.png'
+                'image' => Str::random(5) . '.png',
+                'post_time' => now()
+            ]);
+        }
+
+        sleep(1);
+
+        for ($x = 0; $x <=5; $x++){
+            DB::table('contents')->insert([
+                'user_id' => 2,
+                'title' => $faker->name,
+                'content' => Str::random(100),
+                'image' => Str::random(5) . '.png',
+                'post_time' => now()
             ]);
         }
     }
