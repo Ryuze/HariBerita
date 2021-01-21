@@ -25,20 +25,23 @@
     <div class="article card-deck card-header">
 
         <!-- artikel -->
+
+        @foreach($contents as $contents)
+
+
         <a href="{{ url('/article')}}" class="article-list img-thumbnail">
             <!-- gambarjudul -->
-            <img src="{{asset('img/banner.png')}}" alt="article1" class="article-img">
+            <img src="{{asset($contents -> image)}}" alt="article1" class="article-img">
             <button class="btn article-tag">tag artikel</button>
             <div class="article-caption ">
-                <h5 class="article-title">judul 1</h5>
+                <h5 class="article-title">{{$contents -> title}}</h5>
                 <p class="article-paragraph">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, excepturi accusantium. Omnis
-                    odio alias dicta explicabo, earum enim quos deleniti est, dolorum corporis laborum sint minima
-                    molestias accusamus dolore voluptas.
+                    {{$contents -> content}}
                 </p>
 
             </div>
         </a>
+        @endforeach
 
 
 

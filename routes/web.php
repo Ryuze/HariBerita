@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $contents  = DB::table('contents')->get();
+    return view('index', ['contents'=>$contents]);
 });
 route::get('/tentang', function () {
-    return view('/about/tentang');
+    return view('/homepage/tentang');
 });
 route::get('/article', function () {
-  return view('/konten/article');
+    return view('/homepage/article');
 });
+
 Route::middleware('auth')->group(function () {
     Route::prefix('/dashboard')->group(function () {
         Route::delete('/tag/destroyAll', 'TagController@destroyAll');
