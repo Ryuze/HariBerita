@@ -67,6 +67,11 @@
                                 @enderror
                             </div>
 
+                            <div>
+                                <label for="tags"><strong>Tags</strong></label>
+                                
+                            </div>
+
                             <input type="hidden" name="contentHide" id="contentHide" value="{{ old('content') }}">
                             
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
