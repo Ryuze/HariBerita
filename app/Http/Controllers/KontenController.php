@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KontenController extends Controller
 {
@@ -25,7 +27,8 @@ class KontenController extends Controller
      */
     public function create()
     {
-        return view('konten.create');
+        $tags = Tag::all();
+        return view('konten.create', compact('tags'));
     }
 
     /**
@@ -36,10 +39,12 @@ class KontenController extends Controller
      */
     public function store(Request $request)
     {
+        //validasi
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|unique:contents,title',
             'content' => 'required',
-            'image' => 'required|image|max:2000'
+            'image' => 'required|image|max:2000',
+            'tags' => 'required|exists:tags,name'
         ]);
 
         // simpan gambar
@@ -47,12 +52,26 @@ class KontenController extends Controller
         
         $validatedData['image']->storeAs('public/images', $imgName);
 
+        //simpan konten
         Content::create([
             'user_id' => Auth::user()->id,
             'title' => $validatedData['title'],
             'content' => $validatedData['content'],
             'image' => $imgName
         ]);
+
+        $contentId = Content::selectRaw('id')
+                        ->where('title', '=', $validatedData['title'])
+                        ->get();
+        
+        //simpan tags
+        foreach ($validatedData['tags'] as $tag)
+        {
+            DB::table('content_tags')->insert([
+                'content_id' => $contentId[0]->id,
+                'tag_name' => $tag
+            ]);
+        }
         
         return redirect('dashboard/konten')->with('alert', [
             'type' => 'success',
@@ -80,8 +99,12 @@ class KontenController extends Controller
     public function edit($id)
     {
         $contents = Content::findOrFail($id);
+        $tags = Tag::all();
+        $tagsPicked = DB::table('content_tags')
+                    ->where('content_id', '=', $id)
+                    ->get();
 
-        return view('konten.edit', compact('contents'));
+        return view('konten.edit', compact('contents', 'tags', 'tagsPicked'));
     }
 
     /**
@@ -96,7 +119,8 @@ class KontenController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'image' => 'image|max:2000'
+            'image' => 'image|max:2000',
+            'tags' => 'exists:tags,name'
         ]);
 
         if (isset($request->image))
@@ -134,6 +158,22 @@ class KontenController extends Controller
                 ]);
         }
 
+        //update tag
+        if (isset($validatedData['tags']))
+        {
+            DB::table('content_tags')
+                ->where('content_id', $id)
+                ->delete();
+
+            foreach ($validatedData['tags'] as $tag)
+            {
+                DB::table('content_tags')->insert([
+                    'content_id' => $id,
+                    'tag_name' => $tag
+                ]);
+            }
+        }
+
         return redirect('dashboard/konten')->with('alert', [
             'type' => 'success',
 			'message' => 'Konten berhasil diubah'
@@ -157,6 +197,10 @@ class KontenController extends Controller
         {
             unlink(public_path('storage/images/' . $image[0]->image));
         }
+
+        DB::table('content_tags')
+                ->where('content_id', $id)
+                ->delete();
 
         Content::destroy($id);
 

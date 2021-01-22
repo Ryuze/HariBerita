@@ -18,7 +18,7 @@ class CreateContentsTable extends Migration
             $table->foreignId('user_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('title', 255);
+            $table->string('title', 255)->unique();
             $table->text('content');
             $table->string('image', 100);
             $table->timestamp('post_time')->nullable();
