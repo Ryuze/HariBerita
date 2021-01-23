@@ -63,6 +63,7 @@
 								style="width:500px"><br>
                                
                             </div>
+							<button type="submit" class="btn btn-primary mt-3">Simpan</button>
 				</x-card>
 			</div>
 		</div>
