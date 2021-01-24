@@ -14,11 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $contents  = DB::table('contents')->get();
-    return view('index', ['contents'=>$contents]);
+    return view('index');
 });
 route::get('/tentang', function () {
     return view('/homepage/tentang');
+});
+route::get('/kontak', function () {
+  return view('/homepage/contact');
+});
+route::get('/kode-etik', function () {
+  return view('/homepage/ethic');
 });
 route::get('/article', function () {
     return view('/homepage/article');

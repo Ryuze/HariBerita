@@ -5,21 +5,22 @@
 @section('container')
 <!-- content -->
 
-<div class="container-artikel container-fluid">
-<div class="article card-deck card-header" style="margin:2em 0">
-    <p>
-        web ini dibuat bertujuan untuk menyelesaikan tugas akhir mata kuliah pilihan web framework yang mana projek ini dipimpin oleh Alfian Yunianto(1710631170045) sebagai project leader.
-        adapun anggota kelompok yang bertugas dalam pembuatan tampilan web, database, maintenance dan sebagainya.
-    </p>
-</div>
-    <h2>nama kelompok</h2>
+<div class="container-artikel container-fluid" style="margin-bottom:5em">
+    <div class="article card-deck card-header" style="margin:2em 0">
+        <p>
+            web ini dibuat bertujuan untuk menyelesaikan tugas akhir mata kuliah pilihan web framework. <br>
+            adapun anggota kelompok yang bertugas dalam pembuatan tampilan web, database, maintenance dan sebagainya.
+        </p>
+    </div>
+    <h2><b>nama kelompok</b></h2>
     <ul>
-        <li>M Ayyub salahudin al ayubi</li>
-        <li>Alfin Miftahudin</li>
-        <li>M aziz Lasawali</li>
-        <li>Chaerul Hadad</li>
-        <li>Izhari</li>
-        <li>Reza</li>
+        <li>Abdurahman Azis Lasawali (1710631170030)</li>
+        <li>Alfian Yunianto Suseno (1710631170045)</li>
+        <li>Alfin Miftahudin (1710631170046)</li>
+        <li>Chaerul Hadad (1710631170075)</li>
+        <li>Dwi Septa Kariza (1710631170086)</li>
+        <li>Izhari Alwansyah (1710631170120)</li>
+        <li>Mohammad Sholahuddin Al Ayyubi (1710631170138)</li>
     </ul>
 
 </div>

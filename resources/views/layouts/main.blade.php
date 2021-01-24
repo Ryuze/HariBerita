@@ -36,7 +36,7 @@
                     </div>
                 </li>
                 <li class="nav-item"><a href="{{ url('/tentang')}}" class="nav-link">Tentang</a></li>
-                <li class="nav-item"><a href="" class="nav-link">Kontak</a></li>
+                <li class="nav-item"><a href="{{ url('/kontak')}}" class="nav-link">Kontak</a></li>
             </ul>
 
             <!-- searchbar -->
@@ -71,21 +71,16 @@
             </div>
             <!-- Pedoman -->
             <ul class="ul-footer multi-column" style="width: 50%;">
-                <a href="">
+                <a href="{{ url('/tentang')}}">
                     <li>Tentang Kami</li>
                 </a>
-                <a href="">
+                <a href="{{ url('/kontak')}}">
                     <li>Kontak</li>
                 </a>
-                <a href="">
+                <a href="{{ url('/kode-etik')}}">
                     <li>Kode Etik</li>
                 </a>
-                <a href="">
-                    <li>Redaksi</li>
-                </a>
-                <a href="">
-                    <li>Pedoman Media Siber</li>
-                </a>
+    
             </ul>
 
             <table>

@@ -4,16 +4,13 @@
 
 @section('container')
 <!-- body -->
-<div class=" container-fluid" style="padding-top: 2em;">
+<div class="jumbotron container-fluid" id="jumbotron">
+    <div class="container">
+        <img src="{{asset('img/banner.png')}}" alt="banner" class="banner">
+        <div class="text-banner">
+            <h2>CIGNews</h2>
+            <p>Memberikan Berita yang update dan faktual</p>
 
-    <div class="jumbotron jumbotron-fluid" id="jumbotron">
-        <div class="container">
-            <img src="{{asset('img/banner.png')}}" alt="banner" class="banner">
-            <div class="text-banner">
-                <h2>CIGNews</h2>
-                <p>Memberikan Berita yang update dan faktual</p>
-
-            </div>
         </div>
     </div>
 </div>
@@ -24,24 +21,23 @@
 
     <div class="article card-deck card-header">
 
-        <!-- artikel -->
-
-        @foreach($contents as $contents)
+        <!-- konten -->
 
 
-        <a href="{{ url('/article')}}" class="article-list img-thumbnail">
+
+
+        <a href="/" class="article-list img-thumbnail">
             <!-- gambarjudul -->
-            <img src="{{asset($contents -> image)}}" alt="article1" class="article-img">
-            <button class="btn article-tag">tag artikel</button>
+            <img src="{{asset('img/banner.png')}}" alt="article1" class="article-img">
+            <button class="btn article-tag">tag berita</button>
             <div class="article-caption ">
-                <h5 class="article-title">{{$contents -> title}}</h5>
+                <h5 class="article-title">judul</h5>
                 <p class="article-paragraph">
-                    {{$contents -> content}}
+                    content
                 </p>
 
             </div>
         </a>
-        @endforeach
 
 
 

@@ -35,7 +35,7 @@ li:hover{
 }
 
 
-.dropdown:active .dropdown-menu {
+.dropdown:hover .dropdown-menu {
     display: block;
     animation: anime 500ms ease-in-out forwards;
     animation-delay: -100ms;
@@ -162,7 +162,7 @@ i.fa-grip-lines-vertical{
 
 img{
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
     object-position: center;
 }
 .article-img{
@@ -170,10 +170,10 @@ img{
 height: 40%;
 }
 .content-img{
-    max-height: 243px;
+    max-height: 443px;
 }
 .article-list:hover img{
-    object-fit: contain;
+    object-fit: cover;
     
 }
 .article-tag{
@@ -198,6 +198,7 @@ height: 40%;
 
 .card-footer{
     background-position:  bottom;
+    bottom: 0;
 	background-color: #707070;
 	color:#fff;
     margin-top: 2em;
@@ -247,9 +248,7 @@ height: 40%;
         width: 30%;
     }
 
-.article{
-    margin: auto;
-}
+
     i.fa-grip-lines-vertical{
         display: inline;
     }
@@ -291,12 +290,13 @@ height: 40%;
         width: 100%;
         overflow: visible;
       }
+
+
     .jumbotron{
         background-color: white;
         color: #ff9343;
         border-radius: 10px;
         box-shadow: 0 8px 12px -6px #646262;
-        padding: -2em;
         position: relative;
         display: inline-block;
     }
