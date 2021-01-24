@@ -7,7 +7,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class KontenController extends Controller
 {
@@ -74,12 +74,8 @@ class KontenController extends Controller
             ]);
         }
 
-      //   return redirect('dashboard/konten')->with('alert', [
-      //       'type' => 'success',
-			// 'message' => 'Konten berhasil ditambahkan'
-      //   ]);
-      Session::flash('status', "toastr.success('Konten berhasil ditambahkan.')");
-      return redirect('dashboard/konten');
+        Session::flash('status', "toastr.success('Konten berhasil ditambahkan.')");
+        return redirect('dashboard/konten');
     }
 
     /**
@@ -177,12 +173,8 @@ class KontenController extends Controller
             }
         }
 
-      //   return redirect('dashboard/konten')->with('alert', [
-      //       'type' => 'success',
-			// 'message' => 'Konten berhasil diubah'
-      //   ]);
-      Session::flash('status', "toastr.success('Konten berhasil diubah.')");
-      return redirect('dashboard/konten');
+        Session::flash('status', "toastr.success('Konten berhasil diubah.')");
+        return redirect('dashboard/konten');
     }
 
     /**
@@ -209,11 +201,7 @@ class KontenController extends Controller
 
         Content::destroy($id);
 
-      //   return redirect('dashboard/konten')->with('alert', [
-      //       'type' => 'success',
-			// 'message' => 'Konten berhasil dihapus'
-      //   ]);
-      Session::flash('status', "toastr.success('Konten berhasil dihapus.')");
-      return redirect('dashboard/konten');
+        Session::flash('status', "toastr.success('Konten berhasil dihapus.')");
+        return redirect('dashboard/konten');
     }
 }
