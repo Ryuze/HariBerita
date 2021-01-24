@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tag;
+use Session;
 
 class TagController extends Controller
 {
@@ -44,6 +45,8 @@ class TagController extends Controller
         Tag::create([
           'name' => $request->tag
         ]);
+
+        $request->session()->flash('status', "toastr.success('Tag berhasil ditambahkan.')");
 
         return redirect()->back();
     }
@@ -90,6 +93,8 @@ class TagController extends Controller
       $tag->name = $request->editTag;
       $tag->save();
 
+      $request->session()->flash('status', "toastr.success('Tag berhasil diubah.')");
+
       return redirect()->back();
     }
 
@@ -102,9 +107,11 @@ class TagController extends Controller
     public function destroy($name)
     {
         Tag::findOrFail($name)->delete();
-        $request->session()->flash('status', "toastr.success('Data berhasil dihapus.')");
-        // return $toast;
-        // return redirect()->back();
+        Session::flash('status', "toastr.success('Tag berhasil dihapus.')");
+        return response()->json([
+          'success'=>"Tag terhapus."
+        ]);
+        return redirect()->back();
     }
 
     public function destroyAll(Request $request)

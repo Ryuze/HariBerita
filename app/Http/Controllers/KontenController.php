@@ -7,6 +7,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class KontenController extends Controller
 {
@@ -49,7 +50,7 @@ class KontenController extends Controller
 
         // simpan gambar
         $imgName = time() . '.' . $validatedData['image']->extension();
-        
+
         $validatedData['image']->storeAs('public/images', $imgName);
 
         //simpan konten
@@ -63,7 +64,7 @@ class KontenController extends Controller
         $contentId = Content::selectRaw('id')
                         ->where('title', '=', $validatedData['title'])
                         ->get();
-        
+
         //simpan tags
         foreach ($validatedData['tags'] as $tag)
         {
@@ -72,11 +73,13 @@ class KontenController extends Controller
                 'tag_name' => $tag
             ]);
         }
-        
-        return redirect('dashboard/konten')->with('alert', [
-            'type' => 'success',
-			'message' => 'Konten berhasil ditambahkan'
-        ]);
+
+      //   return redirect('dashboard/konten')->with('alert', [
+      //       'type' => 'success',
+			// 'message' => 'Konten berhasil ditambahkan'
+      //   ]);
+      Session::flash('status', "toastr.success('Konten berhasil ditambahkan.')");
+      return redirect('dashboard/konten');
     }
 
     /**
@@ -127,7 +130,7 @@ class KontenController extends Controller
         {
             // simpan gambar baru
             $imgName = time() . '.' . $validatedData['image']->extension();
-            
+
             $validatedData['image']->storeAs('public/images', $imgName);
 
             // hapus gambar sebelumnya
@@ -139,7 +142,7 @@ class KontenController extends Controller
             {
                 unlink(public_path('storage/images/' . $imageOld[0]->image));
             }
-    
+
             // update db
             Content::where('id', $id)
                 ->update([
@@ -174,10 +177,12 @@ class KontenController extends Controller
             }
         }
 
-        return redirect('dashboard/konten')->with('alert', [
-            'type' => 'success',
-			'message' => 'Konten berhasil diubah'
-        ]);
+      //   return redirect('dashboard/konten')->with('alert', [
+      //       'type' => 'success',
+			// 'message' => 'Konten berhasil diubah'
+      //   ]);
+      Session::flash('status', "toastr.success('Konten berhasil diubah.')");
+      return redirect('dashboard/konten');
     }
 
     /**
@@ -204,9 +209,11 @@ class KontenController extends Controller
 
         Content::destroy($id);
 
-        return redirect('dashboard/konten')->with('alert', [
-            'type' => 'success',
-			'message' => 'Konten berhasil dihapus'
-        ]);
+      //   return redirect('dashboard/konten')->with('alert', [
+      //       'type' => 'success',
+			// 'message' => 'Konten berhasil dihapus'
+      //   ]);
+      Session::flash('status', "toastr.success('Konten berhasil dihapus.')");
+      return redirect('dashboard/konten');
     }
 }

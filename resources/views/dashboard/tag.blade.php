@@ -60,11 +60,11 @@
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $t->name }}</td>
                       <td>
-                        <a href="" class="btn btn-sm btn-warning edit-tag" data-toggle="modal" data-target="#modal-default" data-name="{{ $t->name }}">
+                        <a href="" class="btn btn-sm btn-warning edit-tag" data-toggle="modal" data-target="#modal-default" data-name="{{ $t->name }}" data-url="{{ Route('tag.show', $t->name) }}">
                           <i class="far fa-edit"></i>
                           Edit
                         </a>
-                        <a href="" class="btn btn-sm btn-danger delete-tag" data-name="{{ $t->name }}">
+                        <a href="" class="btn btn-sm btn-danger delete-tag" data-name="{{ $t->name }}" data-url="{{ Route('tag.destroy', $t->name) }}">
                           <i class="far fa-trash-alt"></i>
                           Hapus
                         </a>
@@ -179,12 +179,10 @@
 <!-- Toastr -->
 <script src="/vendor/almasaeed2010/adminlte/plugins/toastr/toastr.min.js"></script>
 
-{{ "aa" }}
-<!-- {{ Session::get('status') }} -->
-{!! session('status') !!}
-{{ "aa" }}
+
 <script>
 {!! session('status') !!}
+
 $(function () {
   var oTable = $("#example").DataTable({
     "responsive": true, "autoWidth": false,
@@ -238,10 +236,7 @@ $(function () {
   $('.edit-tag').click(function (event) {
 
     event.preventDefault();
-    var name = $(this).data('name');
-    // console.log(name);
-    $.get('tag/' + name, function (data) {
-      // $('#submit').val("Edit Tag");
+    $.get($(this).data('url'), function (data) {
       $('#modal-default').modal('show');
       $('#nameTag').html(data.data.name);
       $('#editForm').attr('action', 'tag/'+data.data.name);
@@ -255,16 +250,16 @@ $(function () {
 
     if (check) {
       $.ajax({
-        url: 'tag/'+name,
+        url: $(this).data('url'),
         type: 'DELETE',
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        success: function() {
-          location.reload();
-        },
-        error: function () {
-          alert("gagal");
-        }
+        data: 'name='+$(this).data('name')
+        //
       });
+      location.reload();
+      console.log("tes");
+      location.reload();
+      location.reload();
     } else {
       return false;
     }

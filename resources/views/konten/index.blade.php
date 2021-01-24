@@ -20,7 +20,7 @@
 			</div>
 		</div>
 	</x-slot>
-	
+
     <x-slot name="body">
 		<div class="content">
 			<div class="container-fluid">
@@ -35,7 +35,12 @@
 	</x-slot>
 
 	<x-slot name="botScripts">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="/vendor/almasaeed2010/adminlte/plugins/toastr/toastr.min.css">
+    <script src="/vendor/almasaeed2010/adminlte/plugins/toastr/toastr.min.js"></script>
+
         <script>
+        {!! session('status') !!}
 			$('.confirm').click(function(){
 				var conf = confirm('Yakin untuk menghapus data?');
 
