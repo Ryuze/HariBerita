@@ -111,15 +111,16 @@ class TagController extends Controller
         return response()->json([
           'success'=>"Tag terhapus."
         ]);
-        return redirect()->back();
+        // return redirect()->back();
     }
 
     public function destroyAll(Request $request)
     {
       $ids = $request->ids;
       Tag::whereIn('name',explode(",",$ids))->delete();
+      $request->session()->flash('status', "toastr.success('Tag ditandai berhasil dihapus.')");
       return response()->json([
-        'success'=>"Products Deleted successfully."
+        'success'=>"Tag ditandai terhapus."
       ]);
     }
 }

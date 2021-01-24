@@ -32,7 +32,7 @@ route::get('/article', function () {
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/dashboard')->group(function () {
-        Route::delete('/tag/destroyAll', 'TagController@destroyAll');
+        Route::delete('/tag/destroyAll', 'TagController@destroyAll')->name('tag.destroyAll');
         Route::resource('/tag', 'TagController')->except([
       'create', 'edit'
     ]);

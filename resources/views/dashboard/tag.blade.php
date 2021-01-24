@@ -53,7 +53,7 @@
                     <tr>
                       <td>
                         <div class="icheck-primary d-inline">
-                          <input type="checkbox" class="checkbox-tag" id="check{{ $loop->iteration }}">
+                          <input type="checkbox" class="checkbox-tag" id="check{{ $loop->iteration }}" data-name="{{ $t->name }}">
                           <label for="check{{ $loop->iteration }}"></label>
                         </div>
                       </td>
@@ -80,7 +80,7 @@
                           <label for="checkAll">Check All</label>
                         </div>
                         <div class="icheck-primary d-inline">
-                          <a href="#" class="btn btn-sm btn-danger delete-all">
+                          <a href="" class="btn btn-sm btn-danger delete-all" data-url="{{ Route('tag.destroyAll') }}">
                             <i class="far fa-trash-alt"></i>
                             Hapus yang ditandai
                           </a>
@@ -222,7 +222,6 @@ $(function () {
       $('.checkbox-tag').prop('checked', false)
       $('.checkbox-toggle').prop('checked', false)
     }
-    $(this).data('clicks', !clicks)
   });
 
   $('.checkbox-tag').on('click',function(){
@@ -253,30 +252,33 @@ $(function () {
         url: $(this).data('url'),
         type: 'DELETE',
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        data: 'name='+$(this).data('name')
-        //
+        data: 'name='+$(this).data('name'),
+        success: function (data) {
+          if (data['success']) {
+            location.reload();
+          } else {
+            alert('Whoops Something went wrong!!');
+          }
+        },
+        error: function (data) {
+          alert(data.responseText);
+        }
       });
-      location.reload();
-      console.log("tes");
-      location.reload();
-      location.reload();
-    } else {
-      return false;
     }
+    return false;
   });
 
   $('.delete-all').on('click', function(e) {
     var allVals = [];
-    $(".sub_chk:checked").each(function() {
-      allVals.push($(this).attr('data-id'));
+    $(".checkbox-tag:checked").each(function() {
+      allVals.push($(this).attr('data-name'));
     });
 
-    if(allVals.length <=0)
-    {
-      alert("Please select row.");
-    }  else {
-      var check = confirm("Are you sure you want to delete this row?");
-      if(check == true){
+    if(allVals.length <=0) {
+      toastr.warning("Tidak ada yang ditandai.");
+    } else {
+      var check = confirm("Yakin untuk menghapus data yang ditandai?");
+      if(check){
         var join_selected_values = allVals.join(",");
 
         $.ajax({
@@ -286,9 +288,7 @@ $(function () {
           data: 'ids='+join_selected_values,
           success: function (data) {
             if (data['success']) {
-              alert(data['success']);
-            } else if (data['error']) {
-              alert(data['error']);
+              location.reload();
             } else {
               alert('Whoops Something went wrong!!');
             }
@@ -299,6 +299,7 @@ $(function () {
         });
       }
     }
+    return false;
   });
 
   // $('[data-toggle=confirmation]').confirmation({
