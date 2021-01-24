@@ -39,7 +39,8 @@
 						</a>
 
 						<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-							<a href="#" class="dropdown-item">Pengaturan</a>
+							<a href="{{ URL::to('akun/updateakun') }}" class="nav-link {{ in_array("updateakun", explode("/", Request::path())) ? "active" : "" }}" 
+							class="dropdown-item">Pengaturan</a>
 							<form action="{{ Route('logout') }}" method="post">
 								@csrf
 								<a href="{{ Route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="dropdown-item">Keluar</a>

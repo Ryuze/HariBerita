@@ -29,6 +29,7 @@ route::get('/article', function () {
     return view('/homepage/article');
 });
 
+
 Route::middleware('auth')->group(function () {
     Route::prefix('/dashboard')->group(function () {
         Route::delete('/tag/destroyAll', 'TagController@destroyAll');
@@ -43,5 +44,12 @@ Route::middleware('auth')->group(function () {
     ]);
     });
 });
+Route::middleware('auth')->group(function () {
+    Route::prefix('/akun')->group(function () {
+        route::get('/updateakun', function () {
+        return view('/akun/updateakun');
+    });
+    });
+  });
 
 require __DIR__.'/auth.php';
