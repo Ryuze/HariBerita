@@ -25,20 +25,22 @@
 
 
 
+        @foreach($contents as $contents)
 
-        <a href="/" class="article-list img-thumbnail">
+        <a href="{{ url('/article')}}" class="article-list img-thumbnail">
             <!-- gambarjudul -->
             <img src="{{asset('img/banner.png')}}" alt="article1" class="article-img">
-            <button class="btn article-tag">tag berita</button>
+            <button class="btn article-tag">{{$contents->tag_name}}</button>
             <div class="article-caption ">
-                <h5 class="article-title">judul</h5>
+                <h5 class="article-title">{{$contents->title}}</h5>
                 <p class="article-paragraph">
-                    content
+                    {{$contents->content}}
                 </p>
 
             </div>
         </a>
 
+        @endforeach
 
 
 

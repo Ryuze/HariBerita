@@ -12,7 +12,7 @@
             <section>
                 <p>Email: h.chaerul99@gmail.com (project leader)
                     <br>No. Telp : +62 857-7611-xxxx
-                   </p>
+                </p>
             </section>
         </div>
 

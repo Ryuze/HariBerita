@@ -80,7 +80,7 @@
                 <a href="{{ url('/kode-etik')}}">
                     <li>Kode Etik</li>
                 </a>
-    
+
             </ul>
 
             <table>
