@@ -16,7 +16,15 @@ class HomepageController extends Controller
     {
         //ini bagian ane, jangan ente sentuh
         // dd($id);
-        return view('/homepage/article');
+        $contents = DB::table('contents')
+                    ->selectRaw('users.name as name, title, content, image, post_time, tag_name')
+                    ->join('users', 'contents.user_id', '=', 'users.id')
+                    ->rightJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
+                    ->where('contents.id', '=', $id)
+                    ->get();
+
+        // dd($contents);
+        return view('homepage.article', compact('contents'));
     }
 
     // tampilan data halaman awal

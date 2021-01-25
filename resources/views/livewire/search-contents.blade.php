@@ -46,7 +46,7 @@
                 </td>
                 <td>{{ $item->post_time }}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">
+                    <a href="{{ Route('homepage.show', $item->id) }}" class="btn btn-primary">
                         Lihat konten
                     </a>
                     <div class="btn-group">
