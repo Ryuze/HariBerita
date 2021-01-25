@@ -15,14 +15,17 @@ class HomepageController extends Controller
     public function show($id)
     {
         //ini bagian ane, jangan ente sentuh
+        // dd($id);
+        return view('/homepage/article');
     }
 
     // tampilan data halaman awal
     public function display()
     {
         $contents = DB::table('contents')
-        ->leftJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
-        ->get();
-        return view('index')->with('contents', $contents);
+                    ->leftJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
+                    ->paginate(9);
+
+        return view('index', compact('contents'));
     }
 }

@@ -70,7 +70,7 @@
                                 <label for="image">Gambar</label>
                                 <input type="file" class="form-control-file @error('image') is-invalid @enderror" name="image" id="image">
     
-                                <img src="{{ $contents->image !== null ? asset('storage/images/' . $contents->image) : '' }}" id="preview" alt="" class="img-thumbnail bi bi-image mt-1" width="300px" height="400px"/>
+                                <img src="{{ file_exists(public_path('storage/images/' . $contents->image)) ? asset('storage/images/' . $contents->image) : '' }}" id="preview" alt="" class="img-thumbnail bi bi-image mt-1" width="300px" height="400px"/>
     
                                 @error('image')
                                     <p class="validation-invalid-label">

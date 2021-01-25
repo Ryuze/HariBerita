@@ -32,9 +32,8 @@ route::get('/cari', function () {
 route::get('/kode-etik', function () {
     return view('/homepage/ethic');
 });
-route::get('/article', function () {
-    return view('/homepage/article');
-});
+
+Route::get('/article/{id}', 'HomepageController@show')->name('homepage.show');
 
 
 Route::middleware('auth')->group(function () {

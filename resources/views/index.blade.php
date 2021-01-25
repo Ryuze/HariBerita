@@ -23,28 +23,25 @@
 
         <!-- konten -->
 
+        @foreach($contents as $item)
 
-
-        @foreach($contents as $contents)
-
-        <a href="{{ url('/article')}}" class="article-list img-thumbnail">
+        <a href="{{ Route('homepage.show', $item->id) }}" class="article-list img-thumbnail">
             <!-- gambarjudul -->
-            <img src="{{asset('img/banner.png')}}" alt="article1" class="article-img">
-            <button class="btn article-tag">{{$contents->tag_name}}</button>
+            <img src="{{ file_exists(public_path('storage/images/' . $item->image)) ? asset('storage/images/' . $item->image) : asset('img/banner.png') }}" alt="article1" class="article-img">
+            <button class="btn article-tag">{{$item->tag_name}}</button>
             <div class="article-caption ">
-                <h5 class="article-title">{{$contents->title}}</h5>
+                <h5 class="article-title">{{$item->title}}</h5>
                 <p class="article-paragraph">
-                    {{$contents->content}}
+                    {{$item->content}}
                 </p>
 
             </div>
         </a>
 
         @endforeach
-
-
-
+        
     </div>
+    {{ $contents->links() }}
 
 </div>
 @endsection
