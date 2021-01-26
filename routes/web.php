@@ -26,9 +26,9 @@ route::get('/tentang', function () {
 route::get('/kontak', function () {
     return view('/homepage/contact');
 });
-route::get('/cari', function () {
-    return view('/homepage/search');
-});
+
+Route::get('/search','HomepageController@search');
+
 route::get('/kode-etik', function () {
     return view('/homepage/ethic');
 });

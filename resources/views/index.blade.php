@@ -37,9 +37,7 @@
 
             </div>
         </a>
-
         @endforeach
-        
     </div>
     {{ $contents->links() }}
 

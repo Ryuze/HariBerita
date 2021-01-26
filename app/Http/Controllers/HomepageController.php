@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Content;
+
 
 class HomepageController extends Controller
 {
     public function search(Request $request)
     {
-        //izhari kerjain bagian ini
+        $search = $request->get('query');
+        $contents =DB::table('contents')
+                    ->selectRaw('contents.id, title, content, image, post_time, tag_name')
+                    ->rightJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
+                    ->where('title','like','%'.$search.'%')
+                    ->get();
+        return view('homepage.search',compact('contents'));
     }
 
     public function show($id)

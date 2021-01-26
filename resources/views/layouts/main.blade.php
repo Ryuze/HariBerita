@@ -41,10 +41,10 @@
 
             <!-- searchbar -->
 
-            <form class="form-inline my-2 my-lg-0 search">
+            <form class="form-inline my-2 my-lg-0 search" type="get" action="{{ url('/search') }}">
 
                 <div class="search-area">
-                    <input class="search-bar" type="search" placeholder="cari artikel..." aria-label="Search">
+                    <input class="search-bar" name="query" type="search" placeholder="cari artikel..." aria-label="Search">
                     <button class="search-icon" type="submit"><i class="fa fa-search"></i></button>
                 </div>
                 <div class="fa fa-search" id="clickSearch"></div>

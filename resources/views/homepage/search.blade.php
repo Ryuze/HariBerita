@@ -1,6 +1,6 @@
 @extends('layouts/main')
 
-@section('title', 'Cari')
+@section('title', 'search')
 
 @section('container')
 
@@ -9,47 +9,40 @@
 
     <div class="article card-deck card-header" style="margin:2em 0">
         <h5>
-            Artikel yang anda cari dengan judul : ''
+            Artikel yang anda cari dengan judul "<?php echo $_GET["query"]; ?>"
         </h5>
     </div>
 
     <div class="article card-deck card-header">
 
         <!-- pencarian -->
+        @foreach($contents as $item)
 
-
-
-        <a href="" class="article-search img-thumbnail" style="max-height:fit-content ">
-            <div class="container">
-                <button class="btn article-tag" style="padding:0 3em;">tag name</button>
+        <a href="{{ Route('homepage.show', $item->id) }}" class="article-search img-thumbnail" style="max-height:fit-content ">
+        <div class="container">
+            <button class="btn article-tag">{{$item->tag_name}}</button>
             </div>
             <img src="{{asset('img/banner.png')}}" alt="article1" class="article-img-search">
             <div class="article-paragraph-search">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi aliquid cum excepturi animi
-                harum beatae blanditiis temporibus culpa. Modi possimus illo perferendis nisi culpa quos nemo, eos quo
-                quas.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dignissimos cum illum reprehenderit beatae,
-                aut quia ut fuga ipsum nisi culpa saepe nemo incidunt reiciendis maiores nulla a error blanditiis! Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi aliquid cum excepturi animi
-                harum beatae blanditiis temporibus culpa. Modi possimus illo perferendis nisi culpa quos nemo, eos quo
-                quas.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dignissimos cum illum reprehenderit beatae,
-                aut quia ut fuga ipsum nisi culpa saepe nemo incidunt reiciendis maiores nulla a error blanditiis! Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi aliquid cum excepturi animi
-                harum beatae blanditiis temporibus culpa. Modi possimus illo perferendis nisi culpa quos nemo, eos quo
-                quas.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dignissimos cum illum reprehenderit beatae,
-                aut quia ut fuga ipsum nisi culpa saepe nemo incidunt reiciendis maiores nulla a error blanditiis! Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi aliquid cum excepturi animi
-                harum beatae blanditiis temporibus culpa. Modi possimus illo perferendis nisi culpa quos nemo, eos quo
-                quas.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dignissimos cum illum reprehenderit beatae,
-                aut quia ut fuga ipsum nisi culpa saepe nemo incidunt reiciendis maiores nulla a error blanditiis!
+
+        <div class="article card-deck card-header">
+        <div>
+            <h3 class="article-title">{{$item->title}}</h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="text-muted"><small>Dibuat tanggal {{ $item ->post_time }}</small></p>
+                </div>
+            </div>
+            <p class="article-detail">
+                {{ substr ($item->content, 0, random_int(30,150)) }}
+            </p>
+        </div>
+        </div>
             </div>
         </a>
-
-
+        @endforeach
     </div>
-
 </div>
 @endsection
