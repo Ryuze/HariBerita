@@ -17,13 +17,12 @@ class HomepageController extends Controller
                     ->rightJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
                     ->where('title','like','%'.$search.'%')
                     ->get();
+                    
         return view('homepage.search',compact('contents'));
     }
 
     public function show($id)
     {
-        //ini bagian ane, jangan ente sentuh
-        // dd($id);
         $contents = DB::table('contents')
                     ->selectRaw('users.name as name, title, content, image, post_time, tag_name')
                     ->join('users', 'contents.user_id', '=', 'users.id')
@@ -31,7 +30,6 @@ class HomepageController extends Controller
                     ->where('contents.id', '=', $id)
                     ->get();
 
-        // dd($contents);
         return view('homepage.article', compact('contents'));
     }
 
