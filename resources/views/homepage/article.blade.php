@@ -6,7 +6,7 @@
 <!-- body -->
 <div class=" container" style="padding-top: 2em;margin-bottom: 2em;">
 
-    <div class=" jumbotron">
+    <div class=" jumbotron-fluid">
         <!-- gambar -->
         <img src="{{ file_exists(public_path('storage/images/' . $contents[0]->image)) ? asset('storage/images/' . $contents[0]->image) : asset('img/banner.png') }}" alt="article1" class="article-img content-img">
 
@@ -15,7 +15,7 @@
 
 <!-- content -->
 
-<div class="container-artikel container-fluid">
+<div class="container-artikel container-fluid"style="margin-bottom:2em">
     @foreach ($contents as $tag)
         <button class="btn article-tag" style="margin-bottom: 1em;">{{ $tag->tag_name }}</button>
     @endforeach

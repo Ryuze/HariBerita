@@ -13,30 +13,14 @@
 
 <body>
     <!-- navigation -->
-    <div class="navbar navbar-expand-lg navbar-light box" id="navbar">
+    <div class="navbar navbar-expand-lg navbar-light box" id="navbar" style="position:fixed;z-index:3">
 
-        <a href="{{ url('/')}}" class="navbar-brand" style="color: #ff9343;">CIGNews</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
+        
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <a href="{{ url('/')}}" class="navbar-brand" style="color: #ff9343;">CIGNews</a>
 
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link " id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Kategori
-                        <i class="fas fa-caret-down"></i></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a href="" class="dropdown-item bg-grey text-color box">Kultur</a>
-                        <a href="" class="dropdown-item bg-grey text-color box">Teknologi</a>
-                        <a href="" class="dropdown-item bg-grey text-color box">Politik</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a href="{{ url('/tentang')}}" class="nav-link">Tentang</a></li>
-                <li class="nav-item"><a href="{{ url('/kontak')}}" class="nav-link">Kontak</a></li>
             </ul>
 
             <!-- searchbar -->
@@ -44,8 +28,9 @@
             <form class="form-inline my-2 my-lg-0 search" type="get" action="{{ url('/search') }}">
 
                 <div class="search-area">
-                    <input class="search-bar" name="query" type="search" placeholder="cari artikel..." aria-label="Search">
-                    <button class="search-icon" type="submit"><i class="fa fa-search"></i></button>
+                    <input class="search-bar" name="query" type="search" placeholder="cari artikel..."
+                        aria-label="Search" type="submit">
+                   
                 </div>
                 <div class="fa fa-search" id="clickSearch"></div>
             </form>
@@ -63,7 +48,7 @@
     @Yield('container')
 
     <!-- footer -->
-    <div class="card-footer" style="user-select:none;">
+    <footer class="card-footer" style="user-select:none;">
         <div>
 
             <div class=" text-color" style="width: 20%;">
@@ -92,7 +77,7 @@
             </table>
         </div>
         <div style="color: #f6f6f6; text-align: center; size: 9px;">@2020 Copyright CIGNews</div>
-    </div>
+    </footer>
     <!-- penutup footer -->
 
 </body>

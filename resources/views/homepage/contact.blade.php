@@ -6,7 +6,7 @@
 <!-- content -->
 
 <div class="container-artikel container-fluid">
-    <div class="article card-deck card-header" style="margin:4em 0 12em 0">
+    <div class="article card-deck card-header" style="margin-top:4em">
         <div class="container">
             <h1>Contact</h1>
             <section>
@@ -15,9 +15,7 @@
                 </p>
             </section>
         </div>
-
     </div>
+</div>
 
-
-
-    @endsection
+@endsection

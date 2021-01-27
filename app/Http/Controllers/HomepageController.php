@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Content;
 
-
 class HomepageController extends Controller
 {
     public function search(Request $request)
@@ -15,10 +14,12 @@ class HomepageController extends Controller
         $contents =DB::table('contents')
                     ->selectRaw('contents.id, title, content, image, post_time, tag_name')
                     ->rightJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
-                    ->where('title','like','%'.$search.'%')
+                    ->where('title', 'like', '%'.$search.'%')
+                    ->orWhere('content', 'like', '%'.$search.'%')
+                    ->orWhere('tag_name', 'like', '%'.$search.'%')
                     ->get();
                     
-        return view('homepage.search',compact('contents'));
+        return view('homepage.search', compact('contents'));
     }
 
     public function show($id)
@@ -38,8 +39,12 @@ class HomepageController extends Controller
     {
         $contents = DB::table('contents')
                     ->leftJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
-                    ->paginate(9);
-
+                    ->select('contents.id', 'contents.title', 'contents.content', 'contents.image', DB::RAW('GROUP_CONCAT(content_tags.tag_name) as tag_name'))
+                    ->groupBy('contents.id', 'contents.title', 'contents.content', 'contents.image')
+                    ->paginate(6);
+        
+        // dd($contents);
+                   
         return view('index', compact('contents'));
     }
 }

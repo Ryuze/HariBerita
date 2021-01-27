@@ -19,14 +19,15 @@
         @foreach($contents as $item)
             <a href="{{ Route('homepage.show', $item->id) }}" class="article-search img-thumbnail" style="max-height:fit-content ">
             <div class="container">
-                @foreach ($contents as $tag)
-                    <button class="btn article-tag">{{$tag->tag_name}}</button>
-                @endforeach
+               
                 </div>
                 <img src="{{ file_exists(public_path('storage/images/' . $contents[0]->image)) ? asset('storage/images/' . $contents[0]->image) : asset('img/banner.png') }}" alt="article1" class="article-img-search">
                 <div class="article-paragraph-search">
 
-            <div class="article card-deck card-header">
+            <div class="article ">
+            @foreach ($contents as $tag)
+                    <button class="btn article-tag">{{$tag->tag_name}}</button>
+                @endforeach
             <div>
                 <h3 class="article-title">{{$item->title}}</h3>
             </div>
