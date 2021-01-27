@@ -11,14 +11,13 @@ class HomepageController extends Controller
     public function search(Request $request)
     {
         $search = $request->get('query');
-        $contents =DB::table('contents')
-                    ->selectRaw('contents.id, title, content, image, post_time, tag_name')
-                    ->rightJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
+   
+                    $contents = DB::table('contents')
+                    ->leftJoin('content_tags', 'contents.id', '=', 'content_tags.content_id')
+                    ->select('contents.id', 'contents.title', 'contents.content', 'contents.image','contents.post_time', DB::RAW('GROUP_CONCAT(content_tags.tag_name) as tag_name'))
+                    ->groupBy('contents.id', 'contents.title', 'contents.content', 'contents.image','contents.post_time')
                     ->where('title', 'like', '%'.$search.'%')
-                    ->orWhere('content', 'like', '%'.$search.'%')
-                    ->orWhere('tag_name', 'like', '%'.$search.'%')
                     ->get();
-                    
         return view('homepage.search', compact('contents'));
     }
 

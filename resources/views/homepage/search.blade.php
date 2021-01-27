@@ -21,13 +21,13 @@
             <div class="container">
                
                 </div>
-                <img src="{{ file_exists(public_path('storage/images/' . $contents[0]->image)) ? asset('storage/images/' . $contents[0]->image) : asset('img/banner.png') }}" alt="article1" class="article-img-search">
+                <img src="{{ file_exists(public_path('storage/images/' . $item->image)) ? asset('storage/images/' . $item->image) : asset('img/banner.png') }}" alt="article1" class="article-img-search">
                 <div class="article-paragraph-search">
 
             <div class="article ">
-            @foreach ($contents as $tag)
-                    <button class="btn article-tag">{{$tag->tag_name}}</button>
-                @endforeach
+            <?php
+            $tags = explode(',', $item->tag_name);?>
+            @for ($i = 0; $i < count($tags); $i++) <button class="btn article-tag">{{ $tags[$i] }}</button> @endfor
             <div>
                 <h3 class="article-title">{{$item->title}}</h3>
             </div>
@@ -44,6 +44,7 @@
             </div>
                 </div>
             </a>
+           
         @endforeach
     </div>
 </div>
