@@ -39,7 +39,7 @@
 						</a>
 
 						<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-							<a href="{{ URL::to('akun/updateakun') }}" class="nav-link {{ in_array("updateakun", explode("/", Request::path())) ? "active" : "" }}" 
+							<a href="{{ Route('user.profil', Auth::User()->id) }}" class="nav-link {{ in_array("edit", explode("/", Request::path())) ? "active" : "" }}" 
 							class="dropdown-item">Pengaturan</a>
 							<form action="{{ Route('logout') }}" method="post">
 								@csrf
