@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controller\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,14 +49,15 @@ Route::middleware('auth')->group(function () {
         Route::resource('/', 'DashboardController')->only([
       'index'
     ]);
+        Route::get('/user/{id}', 'UserController@profil')->name('user.profil');
+
+        Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
+        Route::put('/user/{id}', 'UserController@update')->name('user.update');
+
+        Route::get('/user/password/{id}/edit', 'UserController@passwordEdit')->name('password.edit');
+        Route::put('/user/password/{id}', 'UserController@passwordUpdate')->name('update.password');
     });
-});
-Route::middleware('auth')->group(function () {
-    Route::prefix('/akun')->group(function () {
-        route::get('/updateakun', function () {
-            return view('/akun/updateakun');
-        });
-    });
+   
 });
 
 require __DIR__.'/auth.php';
