@@ -32,10 +32,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ URL::to('dashboard/tag') }}" class="nav-link {{ in_array("tag", explode("/", Request::path())) ? "active" : "" }}">
+                    <a href="{{ Route('tag.index') }}" class="nav-link {{ in_array("tag", explode("/", Request::path())) ? "active" : "" }}">
                         <i class="bi bi-bookmark-plus ms-1"></i>
                         <p class="ml-2">
                             Tag
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link {{ in_array("", explode("/", Request::path())) ? "active" : "" }}">
+                        <i class="bi bi-person ms-1"></i>
+                        <p class="ml-2">
+                            Admin
                         </p>
                     </a>
                 </li>
