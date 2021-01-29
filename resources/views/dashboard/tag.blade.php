@@ -211,7 +211,7 @@ $(function () {
     '</div>'
   );
   $('#searchTag').on('keyup change', function () {
-    oTable.column(1).search($(this).val()).draw();
+    oTable.column(2).search($(this).val()).draw();
   });
 
   $('.checkbox-toggle').click(function (e) {
