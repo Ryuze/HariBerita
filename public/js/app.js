@@ -37903,8 +37903,8 @@ __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\HariBerita\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\HariBerita\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\laragon\www\HariBerita\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\HariBerita\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

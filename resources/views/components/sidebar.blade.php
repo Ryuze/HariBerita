@@ -40,13 +40,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link {{ in_array("", explode("/", Request::path())) ? "active" : "" }}">
+                    <a href="{{ URL::to('dashboard/user') }}" class="nav-link {{ in_array("", explode("/", Request::path())) ? "active" : "" }}">
                         <i class="bi bi-person ms-1"></i>
                         <p class="ml-2">
                             Admin
                         </p>
                     </a>
                 </li>
+                <!-- <<li class="nav-item">
+                    <a href="{{ URL::to('dashboard/user') }}" class="nav-link {{ in_array("user", explode("/", Request::path())) ? "active" : "" }}">
+                        <i class="bi bi-people-fill"></i>
+                        <p class="ml-2">
+                            User
+                        </p>
+                    </a>
+                </li> -->
+                
             </ul>
         </nav>
     </div>

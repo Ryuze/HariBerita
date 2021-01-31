@@ -6,20 +6,60 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('user.index',['user'=>$users]);
+    }
+    
     public function create()
     {
-        //bagian heru buat nampilin view create
+		//bagian heru buat nampilin view create
+		return view('user.create');
     }
 
     public function store(Request $request)
     {
-        //bagian heru buat nyimpen data kiriman dari view vreate
+		//bagian heru buat nyimpen data kiriman dari view vreate
+		//validasi
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required',
+            'password' => 'required|min:6|max:16|'
+        ]);
+
+        //simpan data
+        User::create([
+            'user_id' => Auth::user()->id,
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make('$password')
+            
+            ]);
+            
+            $userId = User::selectRaw('id')
+            ->where('name', '=', $validatedData['name'])
+            ->get();
+
+            $request->session()->flash('status', "toastr.success('Tag berhasil ditambahkan.')");
+
+            return redirect('dashboard/user');
     }
 
+    public function delete($id)
+    {
+        // $delete = User::hapus($id);
+        DB::table('users')->where('id',$id)->delete();
+        Session::flash('status', "toastr.success('User berhasil dihapus.')");
+
+        return redirect('dashboard/user');
+    }
     public function edit($id)
     {
         $users = User::findOrFail($id);

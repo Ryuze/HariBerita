@@ -49,6 +49,12 @@ Route::middleware('auth')->group(function () {
         Route::resource('/', 'DashboardController')->only([
       'index'
     ]);
+
+        Route::get('/user','UserController@index');
+        Route::get('/user/create','UserController@create');
+        Route::post('/user/store','UserController@store')->name('user.store');
+        Route::get('/user/delete/{id}','UserController@delete');
+
         Route::get('/user/{id}', 'UserController@profil')->name('user.profil');
 
         Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');

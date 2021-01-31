@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\UserController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+
 
 class User extends Authenticatable
 {
@@ -41,3 +44,49 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+
+class AllUser extends UserController
+{
+	public $username;
+	public $first_name;
+	public $last_name;
+	public $email;
+	public $password;
+
+	public function find($id)
+	{
+		$this->db->select('users.*');
+		$this->db->from('users');
+		$this->db->where('users.id', $id);
+	
+		return $this->db->get()->row();
+	}
+
+	public function all()
+	{
+		$this->db->select('id, name, email, created_at, updated_at');
+		$this->db->from('users');
+		$this->db->order_by('name', 'asc');
+
+		return $this->db->get()->result();
+	}
+
+	public function count()
+	{
+		return $this->db->count_all_results('users');
+	}
+
+    // public function create()
+    // {
+        
+    // }
+
+	public function hapus($id)
+	{
+        // DB::table('users')->where('id',$id)->delete();
+         
+	}
+
+
+}
+
