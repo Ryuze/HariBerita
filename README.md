@@ -1,6 +1,15 @@
 ## Berita Harian
 Project ini ada untuk memenuhi tugas kuliah web framework.
 
+## Creator yang berkontribusi
+1. Abdurahman Azis Lasawali (1710631170030)
+2. Alfian Yunianto Suseno (1710631170045)
+3. Alfin Miftahudin (1710631170046)
+4. Chaerul Hadad (1710631170075)
+5. Dwi Septa Kariza (1710631170086)
+6. Izhari Alwansyah (1710631170120)
+7. Mohammad Sholahuddin Al Ayyubi (1710631170138)
+
 ## Cara pemasangan
 1. git clone project ini
 2. buat database dengan nama "harian"
